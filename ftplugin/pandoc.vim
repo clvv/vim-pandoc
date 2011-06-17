@@ -12,10 +12,10 @@
 "
 setlocal formatoptions=1
 setlocal linebreak
-nnoremap j gj
-nnoremap k gk
-vnoremap j gj
-vnoremap k gk
+nnoremap <buffer> j gj
+nnoremap <buffer> k gk
+vnoremap <buffer> j gj
+vnoremap <buffer> k gk
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " # Do not add two spaces at end of punctuation when joining lines
@@ -139,7 +139,7 @@ EOL
 
 endfunction
 
-set omnifunc=Pandoc_Complete
+setlocal omnifunc=Pandoc_Complete
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
