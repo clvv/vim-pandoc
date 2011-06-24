@@ -67,8 +67,8 @@ setlocal foldmethod=expr
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " # Save folding between sessions
 "
-autocmd BufWinLeave * if expand("%") != "" | mkview | endif
-autocmd BufWinEnter * if expand("%") != "" | loadview | endif
+autocmd BufWinLeave * if expand(&filetype) == "pandoc" | mkview | endif
+autocmd BufWinEnter * if expand(&filetype) == "pandoc" | loadview | endif
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 setlocal dictionary=~/.pandoc/citationkeys.dict
