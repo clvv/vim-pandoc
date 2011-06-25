@@ -127,38 +127,39 @@ syn match pdcHRule  /\s\{0,3}\(\*\s*\)\{3,}\n/	contained nextgroup=pdcHRule
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""
-" Inline Links:
-syn match pdcLinkArea /\[.\{-}\](.\{-})/
+" inline links:
+syn match pdcLinkArea /\[.\{-}\](.\{-})/ 
 syn match pdcLinkText /\[.\{-}\]/hs=s+1,he=e-1 containedin=pdcLinkArea contained contains=@Spell
 syn match pdcLinkURL /(.\{-})/hs=s+1,he=e-1 containedin=pdcLinkArea contained
-syn match pdcLinkTitle /".\{-}"/ contained containedin=pdcLinkURL contains=@Spell 
+syn match pdcLinkTitle /".\{-}"/ contained containedin=pdcLinkURL contains=@Spell
 
-" Ref links:
+" Ref links
 syn match pdcLinkArea /^\[.\{-}\]:\s*http[^>]*$/
 syn match pdcLinkURL /:\s*http[^>]*$/hs=s+2 contained containedin=pdcLinkArea
+" explicit ref-text link
+syn match pdcLinkText /\[.\{-}\]\[.\{-}\]/
+" TODO: implicit ref-text link
+" syn match pdcLinkText /\[.\{-}\]/ containedin=pdcLinkArea
 
-" Link URL for inline <> links: 
+" Link URL for inline <> links:
 syn match pdcLinkURL /<http[^>]*>/
 syn match pdcLinkURL /<[^>]*@[^>]*.[^>]*>/
-
-" Link Title
-" syn match pdcLinkTitle /\s*[("'].*[)"']/ contained contains=@Spell
 
 """""""""""""""""""""""""""""""""""""""
 " Strong:
 "
 "   Using underscores
-syn match pdcStrong / \(__\)\([^_ ]\|[^_]\( [^_]\)\+\)\+\1/    contains=@Spell
+syn match pdcStrong /\(__\)\([^_ ]\|[^_]\( [^_]\)\+\)\+\1/    contains=@Spell
 "   Using Asterisks
-syn match pdcStrong / \(\*\*\)\([^\* ]\|[^\*]\( [^\*]\)\+\)\+\1/    contains=@Spell
+syn match pdcStrong /\(\*\*\)\([^\* ]\|[^\*]\( [^\*]\)\+\)\+\1/    contains=@Spell
 
 """""""""""""""""""""""""""""""""""""""
 " Emphasis:
 "
 "Using underscores
-syn match pdcEmphasis   / \(_\)\([^_ ]\|[^_]\( [^_]\)\+\)\+\1/    contains=@Spell
+syn match pdcEmphasis   /\(_\)\([^_ ]\|[^_]\( [^_]\)\+\)\+\1/    contains=@Spell
 "Using Asterisks
-syn match pdcEmphasis   / \(\*\)\([^\* ]\|[^\*]\( [^\*]\)\+\)\+\1/    contains=@Spell
+syn match pdcEmphasis   /\(\*\)\([^\* ]\|[^\*]\( [^\*]\)\+\)\+\1/    contains=@Spell
 
 """""""""""""""""""""""""""""""""""""""
 " Inline Code:
