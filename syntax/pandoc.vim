@@ -134,7 +134,7 @@ syn match pdcLinkURL /(.\{-})/hs=s+1,he=e-1 containedin=pdcLinkArea contained
 syn match pdcLinkTitle /".\{-}"/ contained containedin=pdcLinkURL contains=@Spell
 
 " Ref links
-syn match pdcLinkArea /^\[.\{-}\]:\s*http[^>]*$/
+syn match pdcLinkArea /^\s*\[.\{-}\]:\s*http[^>]*$/
 syn match pdcLinkURL /:\s*http[^>]*$/hs=s+2 contained containedin=pdcLinkArea
 " explicit ref-text link
 syn match pdcLinkText /\[.\{-}\]\[.\{-}\]/
@@ -202,11 +202,10 @@ syn match pdcDefinitions /:\(\t\|[ ]\{3,}\)/  nextgroup=pdcListItem,pdcCodeBlock
 """""""""""""""""""""""""""""""""""""""
 " Footnote:
 syn match pdcFootnoteID /\[\^[^\]]\+\]/ nextgroup=pdcFootnoteDef
-"   This does not work correctly
-" syn region pdcFootnoteDef  start=/:/ end=/^\n\+\(\(\t\+\|[ ]\{4,}\)\S\)\@!/ contained contains=pdcFootnoteDef
 "   Inline footnotes
 syn region pdcFootnoteDef matchgroup=pdcFootnoteID start=/\^\[/ end=/\]/ contains=pdcLinkArea,pdcLatex,pdcPCite skipnl
-
+syn region pdcFootnoteBlock start=/\[\^.*\]:\s*/ end=/^\n/ contains=pdcLinkArea,pdcLatex,pdcPCite skipnl
+syn match pdcFootnoteID /\[\^.*\]/ contained containedin=pdcFootnoteBlock
 
 """""""""""""""""""""""""""""""""""""""
 " Tables:
@@ -272,6 +271,7 @@ hi link pdcLinkTitle Identifier
 hi link pdcFootnoteID		Identifier
 hi link pdcFootnoteDef		Comment
 hi link pandocFootnoteCont 	Error
+hi link pdcFootnoteBlock	Comment
 
 hi link pdcCodeBlock		String
 hi link pdcCodeHTMLPre		String
