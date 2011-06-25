@@ -2,9 +2,12 @@
 " Language:	Pandoc (superset of Markdown)
 " Maintainer:	Jeremy Schultz <taozhyn@gmail.com>
 " HackedUpBy:	David Sanson
-" URL:
+" ImprovedBy:	Felipe Morales
 " Version:	2.1
 " Changes:
+" 2011-06-24 (Felipe Morales)
+"   - Fixed footnotes and links, and added support for citations.
+"
 " 2011-06-13
 " 	- Separate patterns for **strong** and *emphasis*
 " 	- Enabled bold and italic display (thanks to Dirk Laurie for help with
@@ -16,8 +19,6 @@
 " Remark:	Uses HTML and TeX syntax file
 " TODO:
 " 	- Add support for definition lists
-" 	- Add support for citations
-" 	- Fix bug with multiline footnotes
 "
 if version < 600
   syntax clear
@@ -204,7 +205,7 @@ syn match pdcDefinitions /:\(\t\|[ ]\{3,}\)/  nextgroup=pdcListItem,pdcCodeBlock
 syn match pdcFootnoteID /\[\^[^\]]\+\]/ nextgroup=pdcFootnoteDef
 "   Inline footnotes
 syn region pdcFootnoteDef matchgroup=pdcFootnoteID start=/\^\[/ end=/\]/ contains=pdcLinkArea,pdcLatex,pdcPCite skipnl
-syn region pdcFootnoteBlock start=/\[\^.*\]:\s*/ end=/^\n/ contains=pdcLinkArea,pdcLatex,pdcPCite skipnl
+syn region pdcFootnoteBlock start=/\[\^.*\]:\s*/ end=/^\n^\s\@!/ contains=pdcLinkArea,pdcLatex,pdcPCite skipnl
 syn match pdcFootnoteID /\[\^.*\]/ contained containedin=pdcFootnoteBlock
 
 """""""""""""""""""""""""""""""""""""""
